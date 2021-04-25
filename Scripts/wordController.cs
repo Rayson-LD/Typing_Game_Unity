@@ -46,11 +46,10 @@ public class wordController : MonoBehaviour
    			
    			RemoveLetter();
    			if(IsWordComplete())
+   			{
    				SetCurrent();
-   		}
-   		else if(remaining.Length != typedLetter.Length)
-   		{
-   			Count += 1;
+   				Count = Count + 1;
+   			}
    		}
    		} 
 public bool IsCorrectLetter(string letter)
@@ -67,5 +66,6 @@ public void RemoveLetter()
 public bool IsWordComplete()
 {
 	return remaining.Length == 0;
+	
 }
 }
