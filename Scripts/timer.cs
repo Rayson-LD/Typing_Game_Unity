@@ -7,13 +7,15 @@ public class timer : MonoBehaviour
 {
 	
 	public wordController wordControl;
-    public float timeRemaining = 0;
+    public float timeRemaining = 0f;
     public Text timeText;
      public Text scoreText;
      public Text mistakeText;
+     public Text accuracyText;
      public GameObject scorePanel;
      public float minutes = 0.0f;
      public float seconds = 0.0f;
+     public float accuracy = 0.0f;
      
  	bool timeActive = false;
  	public Text BtnText;
@@ -32,7 +34,19 @@ public class timer : MonoBehaviour
      	minutes = Mathf.FloorToInt(timeRemaining / 60);
          seconds = Mathf.FloorToInt(timeRemaining % 60);
      	timeText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+     	if (minutes == 1f)
+	{
+		
+		scorePanel.SetActive(true);
+		int speed = (((wordControl.Count/5)/(int)minutes)*10);
+		accuracyText.text = string.Format("{0}",speed);
+		scoreText.text = string.Format("{0:00}:{1:00}",minutes,seconds);
+		mistakeText.text = string.Format("{0}",wordControl.Count);
+		timeRemaining = 0;
+		timeActive = false;
+	}
    } 
+   
 }
 public void Reset()
 {
@@ -50,13 +64,7 @@ public void timerButton()
 }
 public void Pause()
 {
-	if (timeActive == false)
-	{
-		
-		scorePanel.SetActive(true);
-		scoreText.text = string.Format("{0:00}:{1:00}",minutes,seconds);
-		mistakeText.text = string.Format("{0}",wordControl.Count);
-	}
+	
 }
 
      
